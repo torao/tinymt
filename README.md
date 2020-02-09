@@ -1,2 +1,2 @@
-# tinymt
-Rust implementation of Tiny Mersenne Twister 64/32 PRNGs
+# TinyMT
+Rust implementation for TinyMT 64/32 -- Mersenne Twister PRNGs with Lightweight Footprint
