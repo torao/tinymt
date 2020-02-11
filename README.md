@@ -1,7 +1,13 @@
-# TinyMT [![CircleCI](https://circleci.com/gh/torao/tinymt.svg?style=svg)](https://circleci.com/gh/torao/tinymt) [![docs](https://docs.rs/tinymt/badge.svg?version=0.6.21)](https://docs.rs/tinymt)
+# TinyMT
+[![CircleCI](https://circleci.com/gh/torao/tinymt/tree/master.svg?style=shield)](https://circleci.com/gh/torao/tinymt) [![docs](https://docs.rs/tinymt/badge.svg?version=0.6.21)](https://docs.rs/tinymt)
 
 Rust implementation for TinyMT 64/32 -- Mersenne Twister PRNGs with Lightweight Footprint. This repository is based on
 the original [TinyMT 1.1.1](https://github.com/MersenneTwister-Lab/TinyMT) @ 9d7ca3c161 implemented in C.
+
+## Algorithms
+
+* TinyMT 32 (32-bit version)
+* TinyMT 64 (64-bit version)
 
 ## Getting Started
 
@@ -56,7 +62,7 @@ $ cargo +nightly fmt       # or fmt -- --check
 
 ## Licenses
 
-```
+<pre>
 MIT License
 
 Copyright (c) 2020 Torao Takami
@@ -78,7 +84,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-```
+</pre>
 
 ## See Also
 
