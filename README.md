@@ -2,7 +2,7 @@
 [![CircleCI](https://circleci.com/gh/torao/tinymt/tree/master.svg?style=shield)](https://circleci.com/gh/torao/tinymt)
 [![docs](https://docs.rs/tinymt/badge.svg?version=0.6.21)](https://docs.rs/tinymt)
 
-Rust implementation for TinyMT 64/32 -- Mersenne Twister PRNGs with Lightweight Footprint.
+Rust implementation of TinyMT 64/32 -- Mersenne Twister PRNGs with Lightweight Footprint.
 
 This create is based on the original [TinyMT 1.1.1](https://github.com/MersenneTwister-Lab/TinyMT) @ 9d7ca3c161
 implemented in C.

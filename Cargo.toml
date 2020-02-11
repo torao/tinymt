@@ -7,8 +7,8 @@ repository = "https://github.com/torao/tinymt"
 keywords = ["prng", "mersennetwister", "mt", "tinymt", "random"]
 license-file = "LICENSE"
 readme = "README.md"
-description = "Rust implementation for TinyMT 64/32 -- Mersenne Twister PRNGs with Lightweight Footprint"
-documentation = "https://github.com/torao/tinymt"
+description = "Rust implementation og TinyMT 64/32 -- Mersenne Twister PRNGs with Lightweight Footprint"
+documentation = "https://docs.rs/tinymt"
 
 [badges]
 circle-ci = { repository = "torao/tinymt", branch = "master" }
