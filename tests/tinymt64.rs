@@ -1,7 +1,7 @@
 extern crate tinymt;
 
-use tinymt::TinyMT64;
 use tinymt::tinymt64::*;
+use tinymt::TinyMT64;
 
 /// https://github.com/MersenneTwister-Lab/TinyMT/blob/master/tinymt/check64.c
 #[test]

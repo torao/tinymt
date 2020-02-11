@@ -44,9 +44,8 @@ pub fn tinymt64_init(random: &mut TinyMT64, seed: u64) {
   random.status[1] = (random.mat2 as u64) ^ (random.tmat as u64);
   for i in 1..MIN_LOOP {
     random.status[i & 1] ^= (i as u64).wrapping_add(
-      6_364_136_223_846_793_005_u64.wrapping_mul(
-        random.status[(i - 1) & 1] ^ (random.status[(i - 1) & 1] >> 62)
-      )
+      6_364_136_223_846_793_005_u64
+        .wrapping_mul(random.status[(i - 1) & 1] ^ (random.status[(i - 1) & 1] >> 62)),
     );
   }
   period_certification(random);
@@ -62,11 +61,7 @@ pub fn tinymt64_init_by_array(random: &mut TinyMT64, init_key: &[u64]) {
   let key_length: usize = init_key.len();
 
   let mut st: [u64; 4] = [0, random.mat1 as u64, random.mat2 as u64, random.tmat];
-  let mut count: usize = if key_length + 1 > MIN_LOOP {
-    key_length + 1
-  } else {
-    MIN_LOOP
-  };
+  let mut count: usize = if key_length + 1 > MIN_LOOP { key_length + 1 } else { MIN_LOOP };
   let mut r: u64 = ini_func1(st[0] ^ st[mid % size] ^ st[(size - 1) % size]);
   st[mid % size] += r;
   r += key_length as u64;

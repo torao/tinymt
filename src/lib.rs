@@ -2,8 +2,8 @@ use std::cmp::min;
 
 use rand::{Error, RngCore, SeedableRng};
 
-pub mod tinymt64;
 pub mod tinymt32;
+pub mod tinymt64;
 
 pub struct TinyMT64Seed(pub [u8; 8]);
 
@@ -77,7 +77,6 @@ impl RngCore for TinyMT64 {
     Ok(())
   }
 }
-
 
 pub struct TinyMT32Seed(pub [u8; 4]);
 
@@ -160,7 +159,6 @@ mod test {
 
   #[test]
   fn tinymt_usage() {
-
     // from nondeterministic seed
     let mut random = TinyMT64::from_entropy();
     let rn = random.gen_range(0.0, 1.0);

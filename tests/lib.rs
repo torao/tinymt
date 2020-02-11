@@ -4,13 +4,16 @@ use rand::{Rng, RngCore, SeedableRng};
 
 use tinymt::{TinyMT32, TinyMT32Seed, TinyMT64, TinyMT64Seed};
 
-pub mod tinymt64;
 pub mod tinymt32;
+pub mod tinymt64;
 
 #[test]
 fn test_tinymt64_seed() {
   assert_eq!(0u64, u64::from_le_bytes(TinyMT64Seed::default().0));
-  assert_eq!([0x08, 0x07, 0x06, 0x05, 0x04, 0x03, 0x02, 0x01], TinyMT64Seed::from(0x0102030405060708u64).as_mut());
+  assert_eq!(
+    [0x08, 0x07, 0x06, 0x05, 0x04, 0x03, 0x02, 0x01],
+    TinyMT64Seed::from(0x0102030405060708u64).as_mut()
+  );
 }
 
 #[test]
@@ -47,7 +50,7 @@ fn test_try_fill_bytes_tinymt32() {
 /// by the specified PRING is 95% or higher.
 fn test_chi_squared(random: &mut dyn RngCore) {
   const DEGREE_OF_FREEDOM: usize = 9;
-  const THRESHOLD: f64 = 16.92;  // 5% for 9 degrees of freedom
+  const THRESHOLD: f64 = 16.92; // 5% for 9 degrees of freedom
   const SAMPLING_COUNT: usize = 1000000;
   let mut histogram = [0; DEGREE_OF_FREEDOM + 1];
   let length = histogram.len();
@@ -66,7 +69,9 @@ fn test_try_fill_bytes(random: &mut dyn RngCore) {
     let mut histogram = [0u32; 8];
     let mut buffer = Vec::<u8>::with_capacity(size);
     let mut total = 0;
-    for _ in 0..size { buffer.push(0) }
+    for _ in 0..size {
+      buffer.push(0)
+    }
     for _ in 0..SAMPLING_COUNT / size {
       random.try_fill_bytes(&mut buffer).unwrap();
       for i in 0..buffer.len() {

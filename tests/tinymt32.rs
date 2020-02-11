@@ -1,5 +1,5 @@
-use tinymt::TinyMT32;
 use tinymt::tinymt32::*;
+use tinymt::TinyMT32;
 
 /// https://github.com/MersenneTwister-Lab/TinyMT/blob/master/tinymt/check32.c
 #[test]

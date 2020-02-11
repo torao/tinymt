@@ -30,7 +30,11 @@ fn ini_func2(x: u32) -> u32 {
 /// This function certificate the period of 2^127-1.
 /// @param random tinymt state vector.
 fn period_certification(random: &mut TinyMT32) {
-  if random.status[0] & TINYMT32_MASK == 0 && random.status[1] == 0 && random.status[2] == 0 && random.status[3] == 0 {
+  if random.status[0] & TINYMT32_MASK == 0
+    && random.status[1] == 0
+    && random.status[2] == 0
+    && random.status[3] == 0
+  {
     random.status[0] = 'T' as u32;
     random.status[1] = 'I' as u32;
     random.status[2] = 'N' as u32;
@@ -48,7 +52,8 @@ pub fn tinymt32_init(random: &mut TinyMT32, seed: u32) {
   random.status[3] = random.tmat;
   for i in 1..MIN_LOOP {
     random.status[i & 3] ^= (i as u32).wrapping_add(
-      1_812_433_253_u32.wrapping_mul(random.status[(i - 1) & 3] ^ (random.status[(i - 1) & 3] >> 30))
+      1_812_433_253_u32
+        .wrapping_mul(random.status[(i - 1) & 3] ^ (random.status[(i - 1) & 3] >> 30)),
     );
   }
   period_certification(random);
@@ -71,11 +76,7 @@ pub fn tinymt32_init_by_array(random: &mut TinyMT32, init_key: &[u32]) {
   st[1] = random.mat1;
   st[2] = random.mat2;
   st[3] = random.tmat;
-  let mut count: usize = if key_length + 1 > MIN_LOOP {
-    key_length + 1
-  } else {
-    MIN_LOOP
-  };
+  let mut count: usize = if key_length + 1 > MIN_LOOP { key_length + 1 } else { MIN_LOOP };
   let mut r: u32 = ini_func1(st[0] ^ st[mid % size] ^ st[(size - 1) % size]);
   st[mid % size] = st[mid % size].wrapping_add(r);
   r += key_length as u32;
@@ -101,7 +102,9 @@ pub fn tinymt32_init_by_array(random: &mut TinyMT32, init_key: &[u32]) {
     i = (i + 1) % size;
   }
   for _ in 0..size {
-    r = ini_func2(st[i % size].wrapping_add(st[(i + mid) % size]).wrapping_add(st[(i + size - 1) % size]));
+    r = ini_func2(
+      st[i % size].wrapping_add(st[(i + mid) % size]).wrapping_add(st[(i + size - 1) % size]),
+    );
     st[(i + mid) % size] ^= r;
     r -= i as u32;
     st[(i + mid + lag) % size] ^= r;
