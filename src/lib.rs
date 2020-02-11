@@ -64,8 +64,8 @@ impl RngCore for TinyMT64 {
     let mut remaining = dest.len();
     while remaining > 0 {
       let bytes = self.next_u64().to_le_bytes();
-      for i in 0..min(remaining, bytes.len()) {
-        dest[position] = bytes[i];
+      for b in bytes.iter().take(min(remaining, bytes.len())) {
+        dest[position] = *b;
         position += 1;
         remaining -= 1;
       }
@@ -138,8 +138,8 @@ impl RngCore for TinyMT32 {
     let mut remaining = dest.len();
     while remaining > 0 {
       let bytes = self.next_u32().to_le_bytes();
-      for i in 0..min(remaining, bytes.len()) {
-        dest[position] = bytes[i];
+      for b in bytes.iter().take(min(remaining, bytes.len())) {
+        dest[position] = *b;
         position += 1;
         remaining -= 1;
       }

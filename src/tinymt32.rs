@@ -77,10 +77,11 @@ pub fn tinymt32_init_by_array(random: &mut TinyMT32, init_key: &[u32]) {
   st[0] = r;
   count -= 1;
   let mut i: usize = 1;
-  for j in 0..min(count, key_length) {
+  let boundary = min(count, key_length);
+  for key in init_key.iter().take(boundary) {
     r = ini_func1(st[i % size] ^ st[(i + mid) % size] ^ st[(i + size - 1) % size]);
     st[(i + mid) % size] = st[(i + mid) % size].wrapping_add(r);
-    r += init_key[j] + i as u32;
+    r += key + i as u32;
     st[(i + mid + lag) % size] = st[(i + mid + lag) % size].wrapping_add(r);
     st[i % size] = r;
     i = (i + 1) % size;

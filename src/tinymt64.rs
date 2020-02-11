@@ -69,10 +69,10 @@ pub fn tinymt64_init_by_array(random: &mut TinyMT64, init_key: &[u64]) {
   count -= 1;
   let mut i = 1;
   let boundary = min(count, key_length);
-  for j in 0..boundary {
+  for key in init_key.iter().take(boundary) {
     r = ini_func1(st[i] ^ st[(i + mid) % size] ^ st[(i + size - 1) % size]);
     st[(i + mid) % size] = st[(i + mid) % size].wrapping_add(r);
-    r += init_key[j] + i as u64;
+    r += key + i as u64;
     st[(i + mid + lag) % size] = st[(i + mid + lag) % size].wrapping_add(r);
     st[i] = r;
     i = (i + 1) % size;
@@ -111,7 +111,7 @@ pub fn tinymt64_get_mexp(_: &TinyMT64) -> usize {
 #[inline]
 pub fn tinymt64_next_state(random: &mut TinyMT64) {
   random.status[0] &= TINYMT64_MASK;
-  let mut x:u64 = random.status[0] ^ random.status[1];
+  let mut x: u64 = random.status[0] ^ random.status[1];
   x ^= x << TINYMT64_SH0;
   x ^= x >> 32;
   x ^= x << 32;
