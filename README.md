@@ -1,4 +1,4 @@
-# TinyMT [![CircleCI](https://circleci.com/gh/torao/tinymt.svg?style=svg)](https://circleci.com/gh/torao/tinymt)
+# TinyMT [![CircleCI](https://circleci.com/gh/torao/tinymt.svg?style=svg)](https://circleci.com/gh/torao/tinymt) [![docs](https://docs.rs/tinymt/badge.svg?version=0.6.21)](https://docs.rs/tinymt)
 
 Rust implementation for TinyMT 64/32 -- Mersenne Twister PRNGs with Lightweight Footprint. This repository is based on
 the original [TinyMT 1.1.1](https://github.com/MersenneTwister-Lab/TinyMT) @ 9d7ca3c161 implemented in C.
@@ -10,7 +10,7 @@ You would use TinyMT random numbers by simply adding the URL of this repository 
 ```toml
 [dependencies]
 rand = "0.7"
-tinymt = { git = "https://github.com/torao/tinymt", tag = "1.0.0" }
+tinymt = "1.0"
 ```
 
 In the head of your source, please declare the `tinymt` crate, and then  retrieve random numbers using `TinyMT64` or
@@ -42,6 +42,7 @@ The modules `tinymt::tinymt64` and `tinymt::tinymt32` that have been migrated fr
 independent of external libraries. This allows you to use them if you expect exactly the same behavior as the original
 C implementation, of if there are some conflicts between the versions of `rand` that TinyMT depends on.
 
+See the [API Reference](doc/api/tinymt/index.html) for all functions.
 
 ## How to Build
 
