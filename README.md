@@ -2,14 +2,14 @@
 [![CircleCI](https://circleci.com/gh/torao/tinymt/tree/master.svg?style=shield)](https://circleci.com/gh/torao/tinymt)
 [![docs](https://docs.rs/tinymt/badge.svg)](https://docs.rs/tinymt)
 
-Rust implementation of TinyMT 64/32 -- Mersenne Twister PRNGs with Lightweight Footprint.
+Rust implementation of TinyMT 64/32 - a lightweight variant of Mersenne Twister PRNG.
 
 This create is based on the original [TinyMT 1.1.1](https://github.com/MersenneTwister-Lab/TinyMT) @ 9d7ca3c161
 implemented in C.
 
-## Algorithm
+## Features
 
-**TinyMT** is a lightweight variant of **Mersenne Twister** MT19937, a widely used PRNG (pseudo-random number generator).
+**TinyMT** is a lightweight variant of **Mersenne Twister** MT19937, a widely used PRNG (pseudo-random number generator). This is useful in the case where you don't need so a long period as MT19937, but need sufficient randomness and speed with less memory.
 
 This algorithm works with only 16B internal state space, which is much smaller than the 2,500B of MT19937. The period is
 2<sup>127</sup>-1, it's shorter than MT19937 but sufficient for practical use. The cost to generate one random number
@@ -17,8 +17,12 @@ was as fast as 4ns on Intel Core i7-8550U CPU.
 
 This crate provides the following two TinyMT implementations.
 
-* TinyMT32 (32-bit version) for `u32` or `f32`
-* TinyMT64 (64-bit version) for `u64` or `f64`
+* TinyMT32 (32-bit version) for `u32` and `f32`. This is also defined as [RFC 8682](https://tools.ietf.org/html/rfc8682) by IEFT.
+* TinyMT64 (64-bit version) for `u64` and `f64`.
+
+In particular, TinyMT32 is also used for random numbers to control which monsters will hatch in Pokémon.
+
+Note that neither TinyMT nor MT 19937 are cryptographically secure pseudo-random number generators. They should not be used in applications where high security is required.
 
 ## Getting Started
 
@@ -30,8 +34,7 @@ rand = "0.7"
 tinymt = "1.0"
 ```
 
-You can declare the `tinymt` crate at the beginning of the source and obtain a random number using `TinyMT64` or its
-32-bit version, `TinyMT32`.
+By declaring `tinymt` crate at the beginning of the source code, you can use `TinyMT64` or `TinyMT32` to obtain random numbers.
 
 ```rust
 extern crate tinymt;
@@ -52,7 +55,7 @@ fn main() {
 }
 ```
 
-The `TinyMT64` and `TinyMT32` respectively implement the `rand::RngCore` features that is widely-used PRNG interface in
+The `TinyMT64` and `TinyMT32` respectively implement the `rand::RngCore` features that are widely-used PRNG interface in
 Rust.
 
 The modules `tinymt::tinymt64` and `tinymt::tinymt32` that have been migrated from the original C implementation are
