@@ -20,9 +20,9 @@ This crate provides the following two TinyMT implementations.
 * TinyMT32 (32-bit version) for `u32` and `f32`. This is also defined as [RFC 8682](https://tools.ietf.org/html/rfc8682) by IEFT.
 * TinyMT64 (64-bit version) for `u64` and `f64`.
 
-In particular, TinyMT32 is also used for random numbers to control which monsters will hatch in Pokémon.
+TinyMT32 is also used for random numbers to control which monsters will hatch in Pokémon.
 
-Note that neither TinyMT nor MT 19937 are cryptographically secure pseudo-random number generators. They should not be used in applications where high security is required.
+Note that neither TinyMT nor MT 19937 are cryptographically secure pseudo-random number generators. You shouldn't use them in applications where high security is required.
 
 ## Getting Started
 
@@ -55,12 +55,11 @@ fn main() {
 }
 ```
 
-The `TinyMT64` and `TinyMT32` respectively implement the `rand::RngCore` features that are widely-used PRNG interface in
-Rust.
+The `TinyMT64` and `TinyMT32` respectively implement the `rand::RngCore` features that are widely-used PRNG interface in Rust. Note that 64-bit operations for `TinyMT32` will generate 32-bit random numbers two times at once for the compatibility of `RngCore`. You should use `u32` or `f32` random number to achieve the best performance in `TinyMT32`.
 
-The modules `tinymt::tinymt64` and `tinymt::tinymt32` that have been migrated from the original C implementation are
-independent of external libraries. This allows you to use them if you expect exactly the same behavior as the original
-C implementation, of if there are some conflicts between the versions of `rand` that TinyMT depends on.
+### Lower-level API
+
+This crate contains two modules `tinymt::tinymt64` and `tinymt::tinymt32` that have been migrated from the original C implementation. They might be useful if you are familiar with the original C implementation. Also, since they are independent of external libraries, it's able to avoid some conflict problems.
 
 See the [API Reference](https://docs.rs/tinymt) for all functions.
 
@@ -76,7 +75,6 @@ $ cargo +nightly fmt       # or fmt -- --check
 
 ## Licenses
 
-```
 MIT License
 
 Copyright (c) 2020 Torao Takami
@@ -98,7 +96,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-```
 
 ## See Also
 

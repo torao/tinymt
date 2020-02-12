@@ -1,13 +1,13 @@
 [package]
 name = "tinymt"
-version = "1.0.3"
+version = "1.0.4"
 authors = ["Torao Takami <koiroha@gmail.com>"]
 edition = "2018"
 repository = "https://github.com/torao/tinymt"
 keywords = ["prng", "mersennetwister", "mt", "tinymt", "random"]
-license-file = "LICENSE"
+license = "MIT"
 readme = "README.md"
-description = "Rust implementation og TinyMT 64/32 -- Mersenne Twister PRNGs with Lightweight Footprint"
+description = "Rust implementation of TinyMT 64/32 - a lightweight variant of Mersenne Twister PRNG"
 documentation = "https://docs.rs/tinymt"
 
 [badges]
