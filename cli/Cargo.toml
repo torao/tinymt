@@ -1,0 +1,26 @@
+[package]
+name = "tinymt-cli"
+version = "1.0.0"
+authors = ["Torao Takami <koiroha@gmail.com>"]
+edition = "2018"
+repository = "https://github.com/torao/tinymt/cli"
+keywords = ["prng", "mersennetwister", "mt", "tinymt", "random"]
+license = "MIT"
+readme = "README.md"
+description = "Rust implementation of TinyMT 64/32 - a lightweight variant of Mersenne Twister PRNG"
+documentation = "https://docs.rs/tinymt"
+
+[badges]
+circle-ci = { repository = "torao/tinymt-cli", branch = "master" }
+maintenance = { status = "passively-maintained" }
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tinymt = { version = "^1.0.0", path = "../" }
+clap = "^2.33.0"
+rand = "^0.7.3"
+
+[[bin]]
+name = "tinymt"
+path = "src/main.rs"
