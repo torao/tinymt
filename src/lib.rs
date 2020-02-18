@@ -40,6 +40,12 @@ pub struct TinyMT64 {
   tmat: u64,
 }
 
+impl TinyMT64 {
+  pub fn from_seed_u64(seed: u64) -> Self {
+    Self::from_seed(TinyMT64Seed::from(seed))
+  }
+}
+
 impl SeedableRng for TinyMT64 {
   type Seed = TinyMT64Seed;
 
@@ -111,6 +117,12 @@ pub struct TinyMT32 {
   mat1: u32,
   mat2: u32,
   tmat: u32,
+}
+
+impl TinyMT32 {
+  pub fn from_seed_u32(seed: u32) -> Self {
+    Self::from_seed(TinyMT32Seed::from(seed))
+  }
 }
 
 impl SeedableRng for TinyMT32 {
