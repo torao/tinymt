@@ -1,5 +1,5 @@
 # TinyMT
-[![CircleCI](https://circleci.com/gh/torao/tinymt/tree/master.svg?style=shield)](https://circleci.com/gh/torao/tinymt)
+[![github actions](https://github.com/torao/tinymt/actions/workflows/build.yml/badge.svg)](https://github.com/torao/tinymt/actions)
 [![docs](https://docs.rs/tinymt/badge.svg)](https://docs.rs/tinymt)
 
 Rust implementation of TinyMT 64/32 - a lightweight variant of Mersenne Twister PRNG.
