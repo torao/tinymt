@@ -7,7 +7,7 @@ const TINYMT32_SH0: u32 = 1;
 const TINYMT32_SH1: u32 = 10;
 const TINYMT32_SH8: u32 = 8;
 const TINYMT32_MASK: u32 = 0x7fff_ffff_u32;
-const TINYMT32_MUL: f64 = (1.0f64 / 16_777_216.0_f64);
+const TINYMT32_MUL: f64 = 1.0f64 / 16_777_216.0_f64;
 const MIN_LOOP: usize = 8;
 const PRE_LOOP: usize = 8;
 

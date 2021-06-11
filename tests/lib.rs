@@ -55,7 +55,7 @@ fn test_chi_squared(random: &mut dyn RngCore) {
   let mut histogram = [0; DEGREE_OF_FREEDOM + 1];
   let length = histogram.len();
   for _ in 0..SAMPLING_COUNT {
-    histogram[random.gen_range(0, length)] += 1;
+    histogram[random.gen_range(0..length)] += 1;
   }
   let expected = SAMPLING_COUNT as f64 / length as f64;
   verify_chi_squared(&histogram[..], expected, THRESHOLD);

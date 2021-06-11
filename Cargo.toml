@@ -1,6 +1,6 @@
 [package]
 name = "tinymt"
-version = "1.0.5"
+version = "1.0.6"
 authors = ["Torao Takami <koiroha@gmail.com>"]
 edition = "2018"
 repository = "https://github.com/torao/tinymt"
@@ -17,4 +17,4 @@ maintenance = { status = "passively-maintained" }
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rand = "0.7"
+rand = "0.8"

@@ -30,7 +30,7 @@ You'll be able to use TinyMT by simply adding the dependency to `Cargo.toml` of 
 
 ```toml
 [dependencies]
-rand = "0.7"
+rand = "0.8"
 tinymt = "1.0"
 ```
 
@@ -45,12 +45,12 @@ use tinymt::{TinyMT64, TinyMT64Seed};
 fn main() {
   // from nondeterministic seed
   let mut random = TinyMT64::from_entropy();
-  let rn = random.gen_range(0.0, 1.0);
+  let rn = random.gen_range(0.0..1.0);
   println!("{}", rn);   // => nondeterministic but such that 0.3487526381670172
 
   // from deterministic seed (reproduction of random number sequence is possible)
   let mut random = TinyMT64::from_seed(TinyMT64Seed::from(0u64));
-  let rn = random.gen_range(0.0, 1.0);
+  let rn = random.gen_range(0.0..1.0);
   println!("{}", rn);   // => 0.5531250908497853
 }
 ```
@@ -72,6 +72,10 @@ $ cargo +nightly test
 $ cargo +nightly clippy
 $ cargo +nightly fmt       # or fmt -- --check
 ```
+
+## History
+
+* 2021-06-12 (v1.0.6) Upgrade `rand` to 0.8.
 
 ## Licenses
 

@@ -7,7 +7,7 @@ const TINYMT64_SH0: u64 = 12;
 const TINYMT64_SH1: u64 = 11;
 const TINYMT64_SH8: u64 = 8;
 const TINYMT64_MASK: u64 = 0x7fff_ffff_ffff_ffff_u64;
-const TINYMT64_MUL: f64 = (1.0 / 9_007_199_254_740_992.0);
+const TINYMT64_MUL: f64 = 1.0 / 9_007_199_254_740_992.0;
 const MIN_LOOP: usize = 8;
 
 impl TinyMT64 {
