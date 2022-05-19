@@ -4,7 +4,7 @@
 
 Rust implementation of TinyMT 64/32 - a lightweight variant of Mersenne Twister PRNG.
 
-This create is based on the original [TinyMT 1.1.1](https://github.com/MersenneTwister-Lab/TinyMT) @ 9d7ca3c161
+This crate is based on the original [TinyMT 1.1.1](https://github.com/MersenneTwister-Lab/TinyMT) @ 9d7ca3c161
 implemented in C.
 
 ## Features
@@ -20,9 +20,9 @@ This crate provides the following two TinyMT implementations.
 * TinyMT32 (32-bit version) for `u32` and `f32`. This is also defined as [RFC 8682](https://tools.ietf.org/html/rfc8682) by IEFT.
 * TinyMT64 (64-bit version) for `u64` and `f64`.
 
-TinyMT32 is also used for random numbers to control which monsters will hatch in Pokémon.
+TinyMT32 has also been used for random numbers to control which monsters will hatch in Pokémon.
 
-Note that neither TinyMT nor MT 19937 are cryptographically secure pseudo-random number generators. You shouldn't use them in applications where high security is required.
+Note that neither TinyMT nor MT 19937 are cryptographically secure pseudo-random number generators. You shouldn't use them in applications where high security is required, such as the generation of private keys.
 
 ## Getting Started
 
