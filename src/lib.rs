@@ -5,6 +5,7 @@ use rand::{Error, RngCore, SeedableRng};
 pub mod tinymt32;
 pub mod tinymt64;
 
+#[derive(Default)]
 pub struct TinyMT64Seed(pub [u8; 8]);
 
 impl From<u64> for TinyMT64Seed {
@@ -16,12 +17,6 @@ impl From<u64> for TinyMT64Seed {
 impl From<TinyMT64Seed> for u64 {
   fn from(seed: TinyMT64Seed) -> Self {
     u64::from_le_bytes(seed.0)
-  }
-}
-
-impl Default for TinyMT64Seed {
-  fn default() -> TinyMT64Seed {
-    TinyMT64Seed([0; 8])
   }
 }
 
@@ -84,6 +79,7 @@ impl RngCore for TinyMT64 {
   }
 }
 
+#[derive(Default)]
 pub struct TinyMT32Seed(pub [u8; 4]);
 
 impl From<u32> for TinyMT32Seed {
@@ -95,12 +91,6 @@ impl From<u32> for TinyMT32Seed {
 impl From<TinyMT32Seed> for u32 {
   fn from(seed: TinyMT32Seed) -> Self {
     u32::from_le_bytes(seed.0)
-  }
-}
-
-impl Default for TinyMT32Seed {
-  fn default() -> TinyMT32Seed {
-    TinyMT32Seed([0; 4])
   }
 }
 

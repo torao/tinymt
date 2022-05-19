@@ -1,8 +1,8 @@
 [package]
 name = "tinymt"
-version = "1.0.6"
+version = "1.0.7"
 authors = ["Torao Takami <koiroha@gmail.com>"]
-edition = "2018"
+edition = "2021"
 repository = "https://github.com/torao/tinymt"
 keywords = ["prng", "mersennetwister", "mt", "tinymt", "random"]
 license = "MIT"

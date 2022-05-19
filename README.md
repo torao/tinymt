@@ -75,6 +75,7 @@ $ cargo +nightly fmt       # or fmt -- --check
 
 ## History
 
+* 2022-05-19 (v1.0.7) Migrate the project to 2021 edition.
 * 2021-06-12 (v1.0.6) Upgrade `rand` to 0.8.
 
 ## Licenses
