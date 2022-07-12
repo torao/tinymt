@@ -36,9 +36,9 @@ fn test_generate_uint32(tinymt: &mut TinyMT32) {
     [2193913817, 1080849512, 33160901, 662956935, 642999063],
     [3384709977, 1723175122, 3866752252, 521822317, 2292524454],
   ];
-  for i in 0..10 {
-    for j in 0..5 {
-      assert_eq!(expected[i][j], tinymt32_generate_uint32(tinymt));
+  for i in &expected {
+    for j in i {
+      assert_eq!(*j, tinymt32_generate_uint32(tinymt));
     }
   }
 }
@@ -57,10 +57,10 @@ fn test_generate_float(tinymt: &mut TinyMT32) {
     [0.8592415, 0.8379903, 0.6638085, 0.8796422, 0.8608698],
     [0.9255103, 0.6475281, 0.7260162, 0.8757523, 0.0845953],
   ];
-  for i in 0..10 {
-    for j in 0..5 {
+  for i in &expected {
+    for j in i {
       let actual = tinymt32_generate_float(tinymt);
-      assert_eq!(format!("{:.7}", expected[i][j]), format!("{:.7}", actual));
+      assert_eq!(format!("{:.7}", *j), format!("{:.7}", actual));
     }
   }
 }
@@ -79,10 +79,10 @@ fn test_generate_float12(tinymt: &mut TinyMT32) {
     [1.2322005, 1.3248408, 1.6282554, 1.6237093, 1.9553823],
     [1.2515985, 1.2902025, 1.8261194, 1.7116343, 1.0828516],
   ];
-  for i in 0..10 {
-    for j in 0..5 {
+  for i in &expected {
+    for j in i {
       let actual = tinymt32_generate_float12(tinymt);
-      assert_eq!(format!("{:.7}", expected[i][j]), format!("{:.7}", actual));
+      assert_eq!(format!("{:.7}", *j), format!("{:.7}", actual));
     }
   }
 }
@@ -101,10 +101,10 @@ fn test_generate_float_oc(tinymt: &mut TinyMT32) {
     [0.6015150, 0.4173800, 0.2261215, 0.5006371, 0.2059622],
     [0.1784128, 0.4403929, 0.5902822, 0.2307619, 0.4184512],
   ];
-  for i in 0..10 {
-    for j in 0..5 {
+  for i in &expected {
+    for j in i {
       let actual = tinymt32_generate_float_oc(tinymt);
-      assert_eq!(format!("{:.7}", expected[i][j]), format!("{:.7}", actual));
+      assert_eq!(format!("{:.7}", *j), format!("{:.7}", actual));
     }
   }
 }
@@ -123,10 +123,10 @@ fn test_generate_float_oo(tinymt: &mut TinyMT32) {
     [0.1003662, 0.8295220, 0.6224557, 0.9157780, 0.4195939],
     [0.2126821, 0.8094529, 0.1176151, 0.1643153, 0.2755433],
   ];
-  for i in 0..10 {
-    for j in 0..5 {
+  for i in &expected {
+    for j in i {
       let actual = tinymt32_generate_float_oo(tinymt);
-      assert_eq!(format!("{:.7}", expected[i][j]), format!("{:.7}", actual));
+      assert_eq!(format!("{:.7}", *j), format!("{:.7}", actual));
     }
   }
 }
@@ -145,10 +145,10 @@ fn test_generate_32double(tinymt: &mut TinyMT32) {
     [0.6132142, 0.2425692, 0.9836005, 0.5532928, 0.4105124],
     [0.5009801, 0.8399252, 0.7654016, 0.6735107, 0.8542220],
   ];
-  for i in 0..10 {
-    for j in 0..5 {
+  for i in &expected {
+    for j in i {
       let actual = tinymt32_generate_32double(tinymt);
-      assert_eq!(format!("{:.7}", expected[i][j]), format!("{:.7}", actual));
+      assert_eq!(format!("{:.7}", *j), format!("{:.7}", actual));
     }
   }
 }

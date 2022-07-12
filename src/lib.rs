@@ -164,11 +164,11 @@ mod test {
     // from nondeterministic seed
     let mut random = TinyMT64::from_entropy();
     let rn = random.gen_range(0.0..1.0);
-    assert!(rn >= 0.0 && rn < 1.0);
+    assert!((0.0..1.0).contains(&rn));
 
     // from deterministic seed (reproduction of random number sequence is possible)
     let mut random = TinyMT64::from_seed(TinyMT64Seed::from(0u64));
     let rn = random.gen_range(0.0..1.0);
-    assert!(rn >= 0.0 && rn < 1.0);
+    assert!((0.0..1.0).contains(&rn));
   }
 }

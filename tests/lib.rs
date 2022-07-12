@@ -87,9 +87,9 @@ fn test_try_fill_bytes(random: &mut dyn RngCore) {
 /// Performs a chi-square test using the specified histogram of uniform random numbers.
 fn verify_chi_squared(histogram: &[u32], expected: f64, threshold: f64) {
   let mut chi2: f64 = 0f64;
-  for i in 0..histogram.len() {
-    println!("{:2}: {}", i, histogram[i]);
-    let actual = histogram[i] as f64;
+  for (i, h) in histogram.iter().enumerate() {
+    println!("{:2}: {}", i, *h);
+    let actual = *h as f64;
     chi2 += (expected - actual) * (expected - actual) / expected;
   }
   println!("χ² := {}, expected := {}", chi2, expected);
