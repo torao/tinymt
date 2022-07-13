@@ -1,3 +1,19 @@
+//!
+//! ```rust
+//! use tinymt::{TinyMT64, TinyMT64Seed, TinyMT32};
+//! use rand::{Rng, SeedableRng};
+//!
+//! // from nondeterministic seed
+//! let mut random = TinyMT64::from_entropy();
+//! let rn = random.gen_range(0.0..1.0);
+//! assert!((0.0..1.0).contains(&rn));
+//!
+//! // from deterministic seed (reproduction of random number sequence is possible)
+//! let mut random = TinyMT64::from_seed(TinyMT64Seed::from(0u64));
+//! let rn = random.gen_range(0.0..1.0);
+//! assert!((0.0..1.0).contains(&rn));
+//! ```
+//!
 use std::cmp::min;
 
 use rand::{Error, RngCore, SeedableRng};
@@ -155,20 +171,31 @@ impl RngCore for TinyMT32 {
 
 #[cfg(test)]
 mod test {
-  use rand::Rng;
-
-  use super::*;
 
   #[test]
-  fn tinymt_usage() {
-    // from nondeterministic seed
-    let mut random = TinyMT64::from_entropy();
-    let rn = random.gen_range(0.0..1.0);
-    assert!((0.0..1.0).contains(&rn));
+  #[cfg(not(target_os = "windows"))]
+  fn profiling() {
+    use super::*;
+    use pprof;
+    use rand::Rng;
+    let guard = pprof::ProfilerGuardBuilder::default()
+      .frequency(1000)
+      .blocklist(&["libc", "libgcc", "pthread"])
+      .build()
+      .unwrap();
 
-    // from deterministic seed (reproduction of random number sequence is possible)
-    let mut random = TinyMT64::from_seed(TinyMT64Seed::from(0u64));
-    let rn = random.gen_range(0.0..1.0);
-    assert!((0.0..1.0).contains(&rn));
+    let mut random = TinyMT64::from_entropy();
+    for _i in 0..10000 {
+      let rn = random.gen_range(0.0..1.0);
+      assert!((0.0..1.0).contains(&rn));
+    }
+
+    if let Ok(report) = guard.report().build() {
+      println!("report: {:?}", &report);
+    };
+    if let Ok(report) = guard.report().build() {
+      let file = std::fs::File::create("flamegraph.svg").unwrap();
+      report.flamegraph(file).unwrap();
+    };
   }
 }
