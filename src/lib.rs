@@ -14,7 +14,10 @@
 //! assert!((0.0..1.0).contains(&rn));
 //! ```
 //!
-use std::cmp::min;
+//! This crate is `no_std` compatible.
+//!
+#![no_std]
+use core::cmp::min;
 
 use rand::{Error, RngCore, SeedableRng};
 
