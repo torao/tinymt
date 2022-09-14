@@ -17,12 +17,12 @@ This algorithm works with only 16B internal state space, which is much smaller t
 2<sup>127</sup>-1, it's shorter than MT19937 but sufficient for practical use. The cost to generate one random number
 was as fast as 4ns on Intel Core i7-8550U CPU.
 
-This crate provides the following two TinyMT implementations.
+This crate provides the following two TinyMT implementations for both `std` and `no_std` environments.
 
 * TinyMT32 (32-bit version) for `u32` and `f32`. This is also defined as [RFC 8682](https://tools.ietf.org/html/rfc8682) by IEFT.
 * TinyMT64 (64-bit version) for `u64` and `f64`.
 
-TinyMT32 has also been used for random numbers to control which monsters will hatch in Pokémon.
+TinyMT32 was also used for random numbers to control which monsters will hatch in Pokémon.
 
 Note that neither TinyMT nor MT 19937 are cryptographically secure pseudo-random number generators. You shouldn't use them in applications where high security is required, such as the generation of private keys.
 
@@ -70,9 +70,9 @@ See the [API Reference](https://docs.rs/tinymt) for all functions.
 The followings are typical `cargo` commands used to test, verify the quality of TinyMT.
 
 ```
-$ cargo +nightly test
-$ cargo +nightly clippy
-$ cargo +nightly fmt       # or fmt -- --check
+$ cargo test
+$ cargo clippy
+$ cargo fmt       # or fmt -- --check
 ```
 
 ## History

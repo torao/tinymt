@@ -18,8 +18,8 @@ maintenance = { status = "passively-maintained" }
 
 [dependencies]
 tinymt = { version = "^1.0.0", path = "../" }
-clap = "^2.33.0"
-rand = "^0.7.3"
+clap = "^3.2.21"
+rand = "^0.8.5"
 
 [[bin]]
 name = "tinymt"

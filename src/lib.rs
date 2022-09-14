@@ -16,7 +16,7 @@
 //!
 //! This crate is `no_std` compatible.
 //!
-#![no_std]
+#![cfg_attr(not(test), no_std)]
 use core::cmp::min;
 
 use rand::{Error, RngCore, SeedableRng};
@@ -46,7 +46,7 @@ impl AsMut<[u8]> for TinyMT64Seed {
 }
 
 /// random TinyMT state vector
-#[derive(PartialEq, Debug, Copy, Clone)]
+#[derive(PartialEq, Eq, Debug, Copy, Clone)]
 pub struct TinyMT64 {
   status: [u64; 2],
   mat1: u32,
@@ -120,7 +120,7 @@ impl AsMut<[u8]> for TinyMT32Seed {
 }
 
 /// tinymt32 internal state vector and parameters
-#[derive(PartialEq, Debug, Copy, Clone)]
+#[derive(PartialEq, Eq, Debug, Copy, Clone)]
 pub struct TinyMT32 {
   status: [u32; 4],
   mat1: u32,

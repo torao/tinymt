@@ -19,5 +19,8 @@ maintenance = { status = "passively-maintained" }
 [dependencies]
 rand = { version = "0.8", default-features = false }
 
+[dev-dependencies]
+rand = { version = "0.8", default-features = false, features = ["getrandom"] }
+
 [target.'cfg(not(windows))'.dev-dependencies]
 pprof = { version = "0.10", features = ["flamegraph"] }
