@@ -16,7 +16,7 @@
 //!
 //! This crate is `no_std` compatible.
 //!
-#![cfg_attr(not(test), no_std)]
+#![no_std]
 use core::cmp::min;
 
 use rand::{Error, RngCore, SeedableRng};
@@ -169,36 +169,5 @@ impl RngCore for TinyMT32 {
   fn try_fill_bytes(&mut self, dest: &mut [u8]) -> Result<(), Error> {
     self.fill_bytes(dest);
     Ok(())
-  }
-}
-
-#[cfg(test)]
-mod test {
-
-  #[test]
-  #[cfg(not(target_os = "windows"))]
-  fn profiling() {
-    use super::*;
-    use pprof;
-    use rand::Rng;
-    let guard = pprof::ProfilerGuardBuilder::default()
-      .frequency(1000)
-      .blocklist(&["libc", "libgcc", "pthread"])
-      .build()
-      .unwrap();
-
-    let mut random = TinyMT64::from_entropy();
-    for _i in 0..10000 {
-      let rn = random.gen_range(0.0..1.0);
-      assert!((0.0..1.0).contains(&rn));
-    }
-
-    if let Ok(report) = guard.report().build() {
-      println!("report: {:?}", &report);
-    };
-    if let Ok(report) = guard.report().build() {
-      let file = std::fs::File::create("flamegraph.svg").unwrap();
-      report.flamegraph(file).unwrap();
-    };
   }
 }

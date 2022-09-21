@@ -95,3 +95,29 @@ fn verify_chi_squared(histogram: &[u32], expected: f64, threshold: f64) {
   println!("χ² := {}, expected := {}", chi2, expected);
   assert!(chi2 < threshold);
 }
+
+#[test]
+#[cfg(not(target_os = "windows"))]
+fn profiling() {
+  use pprof;
+  use rand::Rng;
+  let guard = pprof::ProfilerGuardBuilder::default()
+    .frequency(1000)
+    .blocklist(&["libc", "libgcc", "pthread"])
+    .build()
+    .unwrap();
+
+  let mut random = TinyMT64::from_entropy();
+  for _i in 0..10000 {
+    let rn = random.gen_range(0.0..1.0);
+    assert!((0.0..1.0).contains(&rn));
+  }
+
+  if let Ok(report) = guard.report().build() {
+    println!("report: {:?}", &report);
+  };
+  if let Ok(report) = guard.report().build() {
+    let file = std::fs::File::create("flamegraph.svg").unwrap();
+    report.flamegraph(file).unwrap();
+  };
+}
