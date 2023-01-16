@@ -1,4 +1,23 @@
-use std::cmp::min;
+//!
+//! ```rust
+//! use tinymt::{TinyMT64, TinyMT64Seed, TinyMT32};
+//! use rand::{Rng, SeedableRng};
+//!
+//! // from nondeterministic seed
+//! let mut random = TinyMT64::from_entropy();
+//! let rn = random.gen_range(0.0..1.0);
+//! assert!((0.0..1.0).contains(&rn));
+//!
+//! // from deterministic seed (reproduction of random number sequence is possible)
+//! let mut random = TinyMT64::from_seed(TinyMT64Seed::from(0u64));
+//! let rn = random.gen_range(0.0..1.0);
+//! assert!((0.0..1.0).contains(&rn));
+//! ```
+//!
+//! This crate is `no_std` compatible.
+//!
+#![no_std]
+use core::cmp::min;
 
 use rand::{Error, RngCore, SeedableRng};
 
@@ -27,7 +46,7 @@ impl AsMut<[u8]> for TinyMT64Seed {
 }
 
 /// random TinyMT state vector
-#[derive(PartialEq, Debug, Copy, Clone)]
+#[derive(PartialEq, Eq, Debug, Copy, Clone)]
 pub struct TinyMT64 {
   status: [u64; 2],
   mat1: u32,
@@ -101,7 +120,7 @@ impl AsMut<[u8]> for TinyMT32Seed {
 }
 
 /// tinymt32 internal state vector and parameters
-#[derive(PartialEq, Debug, Copy, Clone)]
+#[derive(PartialEq, Eq, Debug, Copy, Clone)]
 pub struct TinyMT32 {
   status: [u32; 4],
   mat1: u32,
@@ -150,25 +169,5 @@ impl RngCore for TinyMT32 {
   fn try_fill_bytes(&mut self, dest: &mut [u8]) -> Result<(), Error> {
     self.fill_bytes(dest);
     Ok(())
-  }
-}
-
-#[cfg(test)]
-mod test {
-  use rand::Rng;
-
-  use super::*;
-
-  #[test]
-  fn tinymt_usage() {
-    // from nondeterministic seed
-    let mut random = TinyMT64::from_entropy();
-    let rn = random.gen_range(0.0..1.0);
-    assert!(rn >= 0.0 && rn < 1.0);
-
-    // from deterministic seed (reproduction of random number sequence is possible)
-    let mut random = TinyMT64::from_seed(TinyMT64Seed::from(0u64));
-    let rn = random.gen_range(0.0..1.0);
-    assert!(rn >= 0.0 && rn < 1.0);
   }
 }

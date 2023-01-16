@@ -1,4 +1,4 @@
-use std::cmp::min;
+use core::cmp::min;
 
 use crate::TinyMT64;
 
