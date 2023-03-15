@@ -75,8 +75,9 @@ $ cargo clippy
 $ cargo fmt       # or fmt -- --check
 ```
 
-## History
+## Histories
 
+* 2023-03-15 (v1.0.8) `no-std` available.
 * 2022-05-19 (v1.0.7) Migrate the project to 2021 edition.
 * 2021-06-12 (v1.0.6) Upgrade `rand` to 0.8.
 
