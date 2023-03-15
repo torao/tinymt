@@ -1,5 +1,6 @@
 # TinyMT
-[![github actions](https://github.com/torao/tinymt/actions/workflows/build.yml/badge.svg)](https://github.com/torao/tinymt/actions)
+[![Release Build Status for Linux](https://github.com/torao/tinymt/actions/workflows/build.yml/badge.svg)](https://github.com/torao/tinymt/actions)
+[![Test Status](https://github.com/torao/tinymt/actions/workflows/test.yml/badge.svg)](https://github.com/torao/tinymt/actions)
 [![docs](https://docs.rs/tinymt/badge.svg)](https://docs.rs/tinymt)
 [![crates.io](https://img.shields.io/crates/v/tinymt.svg)](https://crates.io/crates/tinymt)
 
