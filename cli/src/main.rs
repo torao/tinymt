@@ -1,8 +1,4 @@
-extern crate clap;
-extern crate rand;
-extern crate tinymt;
-
-use clap::{App, Arg};
+use clap::{Arg, Command};
 use rand::{Rng, RngCore, SeedableRng};
 use std::process;
 use std::str::FromStr;
@@ -17,7 +13,7 @@ where
 }
 
 /// Generate TinyMT32 with specified seed.
-fn rand32(seed: Option<&str>) -> Result<TinyMT32, String> {
+fn rand32(seed: Option<&String>) -> Result<TinyMT32, String> {
   Ok(if let Some(seed) = seed {
     let seed: u32 = num(seed)?;
     TinyMT32::from_seed_u32(seed)
@@ -27,7 +23,7 @@ fn rand32(seed: Option<&str>) -> Result<TinyMT32, String> {
 }
 
 /// Generate TinyMT64 with specified seed.
-fn rand64(seed: Option<&str>) -> Result<TinyMT64, String> {
+fn rand64(seed: Option<&String>) -> Result<TinyMT64, String> {
   Ok(if let Some(seed) = seed {
     let seed: u64 = num(seed)?;
     TinyMT64::from_seed_u64(seed)
@@ -45,9 +41,9 @@ fn main() {
 
 fn exec() -> Result<(), String> {
   let args = arguments().get_matches();
-  let seed = args.value_of("seed");
-  let n: usize = num(args.value_of("count").unwrap())?;
-  match args.value_of("type").unwrap() {
+  let seed = args.get_one::<String>("seed");
+  let n = num(args.get_one::<String>("count").unwrap())?;
+  match args.get_one::<String>("type").unwrap().as_str() {
     "int" | "int32" | "i32" | "u32" | "32" => {
       print(&mut rand32(seed)?, n, |r| format!("{}", r.next_u32()))
     }
@@ -62,8 +58,8 @@ fn exec() -> Result<(), String> {
     }
     "string" | "str" | "s" => {
       let mut r = rand64(seed)?;
-      let length: usize = num(args.value_of("length").unwrap())?;
-      let radix: Vec<char> = args.value_of("radix").unwrap().chars().collect();
+      let length: usize = num(args.get_one::<String>("length").unwrap())?;
+      let radix: Vec<char> = args.get_one::<String>("radix").unwrap().chars().collect();
       for _ in 0..n {
         println!(
           "{}",
@@ -87,41 +83,41 @@ fn error(message: String) -> ! {
   process::exit(1)
 }
 
-fn arguments() -> App<'static> {
-  App::new("tinymt")
+fn arguments() -> Command {
+  Command::new("tinymt")
     .version("1.0")
     .author("Torao Takami <koiroha@mail.com>")
     .about("TinyMT 64/32-bit Random Number Generator CLI")
     .arg(
-      Arg::with_name("count")
+      Arg::new("count")
         .short('n')
-        .takes_value(true)
+        .number_of_values(1)
         .default_value("1")
         .help("number to generate"),
     )
     .arg(
-      Arg::with_name("type")
+      Arg::new("type")
         .short('t')
         .long("type")
-        .takes_value(true)
+        .number_of_values(1)
         .default_value("double")
         .help("generate random number of int, long, float, double or string type"),
     )
     .arg(
-      Arg::with_name("length")
+      Arg::new("length")
         .short('l')
         .long("length")
-        .takes_value(true)
+        .number_of_values(1)
         .default_value("32")
         .help("the number of characters when generating random strings"),
     )
     .arg(
-      Arg::with_name("radix")
+      Arg::new("radix")
         .short('r')
         .long("radix")
-        .takes_value(true)
+        .number_of_values(1)
         .default_value("0123456789abcdefghijklmnopqrstuvwxyz")
         .help("characters to be used when generating random string"),
     )
-    .arg(Arg::with_name("seed").help("seed of pseudo-random number generator"))
+    .arg(Arg::new("seed").help("seed of pseudo-random number generator"))
 }

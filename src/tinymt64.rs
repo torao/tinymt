@@ -41,7 +41,7 @@ fn period_certification(random: &mut TinyMT64) {
 /// @param seed a 64-bit unsigned integer used as a seed.
 pub fn tinymt64_init(random: &mut TinyMT64, seed: u64) {
   random.status[0] = seed ^ ((random.mat1 as u64) << 32);
-  random.status[1] = (random.mat2 as u64) ^ (random.tmat as u64);
+  random.status[1] = (random.mat2 as u64) ^ random.tmat;
   for i in 1..MIN_LOOP {
     random.status[i & 1] ^= (i as u64).wrapping_add(
       6_364_136_223_846_793_005_u64

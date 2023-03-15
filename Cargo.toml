@@ -1,6 +1,6 @@
 [package]
 name = "tinymt"
-version = "1.0.7"
+version = "1.0.8"
 authors = ["Torao Takami <koiroha@gmail.com>"]
 edition = "2021"
 repository = "https://github.com/torao/tinymt"
@@ -9,6 +9,7 @@ license = "MIT"
 readme = "README.md"
 description = "Rust implementation of TinyMT 64/32 - a lightweight variant of Mersenne Twister PRNG"
 documentation = "https://docs.rs/tinymt"
+members = ["cli"]
 
 [badges]
 circle-ci = { repository = "torao/tinymt", branch = "master" }
@@ -23,4 +24,4 @@ rand = { version = "0.8", default-features = false }
 rand = { version = "0.8", default-features = false, features = ["getrandom"] }
 
 [target.'cfg(not(windows))'.dev-dependencies]
-pprof = { version = "0.10", features = ["flamegraph"] }
+pprof = { version = "0.11", features = ["flamegraph"] }
