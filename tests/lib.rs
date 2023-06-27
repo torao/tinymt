@@ -97,7 +97,7 @@ fn verify_chi_squared(histogram: &[u32], expected: f64, threshold: f64) {
 }
 
 #[test]
-#[cfg(not(target_os = "windows"))]
+#[cfg(not(any(target_family = "windows", target_family = "wasm")))]
 fn profiling() {
   use pprof;
   use rand::Rng;

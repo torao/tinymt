@@ -1,4 +1,5 @@
 # TinyMT
+
 [![Release Build Status for Linux](https://github.com/torao/tinymt/actions/workflows/build.yml/badge.svg)](https://github.com/torao/tinymt/actions)
 [![Test Status](https://github.com/torao/tinymt/actions/workflows/test.yml/badge.svg)](https://github.com/torao/tinymt/actions)
 [![docs](https://docs.rs/tinymt/badge.svg)](https://docs.rs/tinymt)
@@ -14,7 +15,7 @@ implemented in C.
 **TinyMT** is a lightweight variant of **Mersenne Twister** MT19937, a widely used PRNG (pseudo-random number generator). This is useful in the case where you don't need so a long period as MT19937, but need sufficient randomness and speed with less memory.
 
 This algorithm works with only 16B internal state space, which is much smaller than the 2,500B of MT19937. The period is
-2<sup>127</sup>-1, it's shorter than MT19937 but sufficient for practical use. The cost to generate one random number
+2¹²⁷-1, it's shorter than MT19937 but sufficient for practical use. The cost to generate one random number
 was as fast as 4ns on Intel Core i7-8550U CPU.
 
 This crate provides the following two TinyMT implementations for both `std` and `no_std` environments.
@@ -63,20 +64,34 @@ The `TinyMT64` and `TinyMT32` respectively implement the `rand::RngCore` feature
 
 This crate contains two modules `tinymt::tinymt64` and `tinymt::tinymt32` that have been migrated from the original C implementation. They might be useful if you are familiar with the original C implementation. Also, since they are independent of external libraries, it's able to avoid some conflict problems.
 
-See the [API Reference](https://docs.rs/tinymt) for all functions.
+See [the API Reference](https://docs.rs/tinymt) for all functions.
 
 ## How to Build
 
 The followings are typical `cargo` commands used to test, verify the quality of TinyMT.
 
+```shell
+cargo test
+cargo clippy
+cargo fmt       # or fmt -- --check
 ```
-$ cargo test
-$ cargo clippy
-$ cargo fmt       # or fmt -- --check
+
+## WebAssembly Support
+
+TinyMT is fully available in Rust code targeting WebAssembly (WASM). If `wasmer` is set up in your environment, you can run `cargo test --target wasm32-wasi`. See also [.cargo/config](.cargo/config)
+
+If your target doesn't support WASI, like `wasm32-unknown-unknown`, the entropy-based seeding from OS isn't automatically supported. In this case, you can use TinyMT either by using an application-defined seed without using `from_entropy()`, or if the target supports JS such as a browser, by making `getrandom()` dependent on JS as follow.
+
+```toml
+[dependencies]
+getrandom = { version = "0.2", features = ["js"] }
 ```
+
+See [the description of getrandom](https://docs.rs/getrandom/latest/getrandom/#webassembly-support) for more information.
 
 ## Histories
 
+* 2023-06-30 (v1.0.9) Add support for WebAssembly.
 * 2023-03-15 (v1.0.8) `no-std` available.
 * 2022-05-19 (v1.0.7) Migrate the project to 2021 edition.
 * 2021-06-12 (v1.0.6) Upgrade `rand` to 0.8.
@@ -85,7 +100,7 @@ $ cargo fmt       # or fmt -- --check
 
 MIT License
 
-Copyright (c) 2020 Torao Takami
+Copyright (c) 2023 Torao Takami
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
