@@ -23,5 +23,5 @@ rand = { version = "0.8", default-features = false }
 [dev-dependencies]
 rand = { version = "0.8", default-features = false, features = ["getrandom"] }
 
-[target.'cfg(not(windows))'.dev-dependencies]
+[target.'cfg(not(any(target_family="windows",target_family="wasm")))'.dev-dependencies]
 pprof = { version = "0.11", features = ["flamegraph"] }

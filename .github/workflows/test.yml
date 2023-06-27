@@ -16,6 +16,7 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+          target: wasm32-wasi
           components: rustfmt, clippy
       - uses: actions-rs/cargo@v1
         with:
@@ -25,7 +26,16 @@ jobs:
         with:
           command: clippy
           args: -- -D warnings
+
+      # Test on native target
       - uses: actions-rs/cargo@v1
         with:
           command: test
           args: --release --all-features
+
+      # Test on WASM target
+      - uses: wasmerio/setup-wasmer@v2
+      - uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: --release --all-features --target wasm32-wasi
